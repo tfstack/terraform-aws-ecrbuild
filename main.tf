@@ -8,6 +8,13 @@ locals {
     var.repository_name :
     "${var.repository_name}-${var.suffix}"
   )
+  files = fileset(var.container_source_path, "**")
+  hash = md5(
+    join(
+      "",
+      [for f in local.files : "${f}:${filemd5("${var.container_source_path}/${f}")}"]
+    )
+  )
 }
 
 data "aws_region" "this" {}
@@ -43,11 +50,10 @@ resource "archive_file" "this" {
 }
 
 resource "aws_s3_object" "this" {
-  bucket = module.s3_bucket.bucket_id
-  key    = "${var.app_name}.zip"
-  source = archive_file.this.output_path
-  # source_hash = filesha256(join("", fileset(var.container_source_path, "**")))
-  source_hash = md5(join("", fileset(var.container_source_path, "**")))
+  bucket      = module.s3_bucket.bucket_id
+  key         = "${var.app_name}.zip"
+  source      = archive_file.this.output_path
+  source_hash = local.hash
 }
 
 ############################################
