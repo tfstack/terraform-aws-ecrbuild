@@ -10,6 +10,7 @@ resource "random_string" "suffix" {
 }
 
 locals {
+  region                 = "ap-southeast-2"
   repository_name        = "test-ecr-build"
   base_name              = "${local.repository_name}-${random_string.suffix.result}"
   app_name               = "hello"
@@ -28,6 +29,10 @@ output "base_name" {
 
 output "app_name" {
   value = local.app_name
+}
+
+output "region" {
+  value = local.region
 }
 
 output "repository_name" {
