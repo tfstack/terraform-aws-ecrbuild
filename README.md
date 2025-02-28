@@ -55,6 +55,7 @@ Terraform module for automating Docker image builds and pushes to ECR using AWS 
 | <a name="input_container_archive_path"></a> [container\_archive\_path](#input\_container\_archive\_path) | Path to store the archived ZIP file for the container build | `string` | n/a | yes |
 | <a name="input_container_source_path"></a> [container\_source\_path](#input\_container\_source\_path) | Path to the local directory containing the container source | `string` | n/a | yes |
 | <a name="input_log_retention_days"></a> [log\_retention\_days](#input\_log\_retention\_days) | Retention period for CloudWatch logs in days | `number` | `30` | no |
+| <a name="input_region"></a> [region](#input\_region) | AWS region for the provider. Defaults to ap-southeast-2 if not specified. | `string` | `"ap-southeast-2"` | no |
 | <a name="input_repository_force_delete"></a> [repository\_force\_delete](#input\_repository\_force\_delete) | Set to true to allow forced deletion of the ECR repository on destroy | `bool` | `false` | no |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Base name for the repository and associated resources | `string` | n/a | yes |
 | <a name="input_suffix"></a> [suffix](#input\_suffix) | Optional suffix for resource names | `string` | `""` | no |
