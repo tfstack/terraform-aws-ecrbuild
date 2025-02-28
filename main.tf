@@ -25,7 +25,10 @@ data "aws_caller_identity" "current" {}
 ############################################
 
 module "ecr" {
-  source          = "tfstack/ecr/aws"
+  source = "tfstack/ecr/aws"
+
+  region = var.region
+
   repository_name = local.base_name
   force_delete    = var.repository_force_delete
 
@@ -37,6 +40,8 @@ module "ecr" {
 ############################################
 module "s3_bucket" {
   source = "tfstack/s3/aws"
+
+  region = var.region
 
   bucket_name   = var.repository_name
   bucket_suffix = var.suffix
