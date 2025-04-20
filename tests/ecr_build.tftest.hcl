@@ -6,7 +6,6 @@ run "setup" {
 
 run "test_ecr_build" {
   variables {
-    region                  = run.setup.region
     repository_name         = run.setup.repository_name
     app_name                = "hello"
     suffix                  = run.setup.suffix

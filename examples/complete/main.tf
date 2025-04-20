@@ -5,7 +5,6 @@ resource "random_string" "suffix" {
 }
 
 locals {
-  region          = "ap-southeast-2"
   repository_name = "demo-test"
   base_name       = "${local.repository_name}-${random_string.suffix.result}"
   app_name        = "hello"
@@ -15,7 +14,6 @@ module "aws_ecrbuild" {
   source = "../.."
 
   # Naming & Resource Identifiers
-  region                  = local.region
   repository_name         = local.repository_name
   app_name                = local.app_name
   suffix                  = random_string.suffix.result
